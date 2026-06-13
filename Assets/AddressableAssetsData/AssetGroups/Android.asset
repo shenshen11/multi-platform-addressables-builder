@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Android
+  m_EditorClassIdentifier: 
+  m_GroupName: Android
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2fe5d4759bd1d03468145e1d212d052c
+  m_SerializeEntries:
+  - m_GUID: 289555fc85275c34ab26792c5060e65a
+    m_Address: Android_HMI_Dashboard
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d698c3e689a3bc344bc4aaafa8d4990e
+    m_Address: Android_HMI_Icons
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 32a82efbe13440c4a9c3f906af4e2caa, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: c3110faa40f0cb94b824febfc8fbe3d2, type: 2}
+    - {fileID: 11400000, guid: 93e47ed1b782c9d4795b29333e9cc6d3, type: 2}

@@ -1,0 +1,37 @@
+# Unity generated
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emory[Cc]aptures/
+
+# Build output
+[Bb]uild/
+[Bb]uilds/
+BuildOutput/
+
+# Visual Studio / Rider
+*.csproj
+*.sln
+*.user
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+.vs/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test assets (dev-only, not part of the deliverable package)
+Assets/TestAssets/
+Assets/TestAssets.meta
+Assets/Editor/
+Assets/Editor.meta
+
+# Claude Code local settings (contains machine-specific paths)
+.claude/settings.local.json
