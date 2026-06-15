@@ -33,5 +33,21 @@ Assets/TestAssets.meta
 Assets/Editor/
 Assets/Editor.meta
 
+# Unity default template assets (not part of this package)
+Assets/Scenes/
+Assets/Scenes.meta
+Assets/Settings/
+Assets/Settings.meta
+Assets/TutorialInfo/
+Assets/TutorialInfo.meta
+Assets/Readme.asset
+Assets/Readme.asset.meta
+Assets/UniversalRenderPipelineGlobalSettings.asset
+Assets/UniversalRenderPipelineGlobalSettings.asset.meta
+
+# Internal planning documents
+*.md linguist-generated
+单Editor多平台Addressables构建工具计划书.md
+
 # Claude Code local settings (contains machine-specific paths)
 .claude/settings.local.json
