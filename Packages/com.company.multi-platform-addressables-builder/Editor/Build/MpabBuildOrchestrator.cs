@@ -118,6 +118,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 ContentStatePath = platform.ContentStatePath,
                 Status = "Running"
             };
+            var relocations = new List<MpabEntryRelocation>();
 
             try
             {
@@ -153,6 +154,9 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
                 addressables.ApplyGroupStates(decisions);
 
+                relocations = addressables.RelocateEntriesByLabel(decisions, request.Config, platform);
+                session.RelocatedEntries = relocations;
+
                 session.Step = MpabSessionStep.SaveModifiedConfig;
                 sessionStore.Save(session);
                 addressables.SaveModifiedAddressablesAssets();
@@ -168,6 +172,15 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
                 session.Step = MpabSessionStep.CollectResult;
                 sessionStore.Save(session);
+
+                if (relocations.Count > 0)
+                {
+                    addressables.RestoreRelocatedEntries(relocations);
+                    session.RelocatedEntries.Clear();
+                    sessionStore.Save(session);
+                    addressables.SaveModifiedAddressablesAssets();
+                }
+
                 platformReport.Status = "Succeeded";
             }
             catch (Exception ex)
@@ -177,6 +190,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
             }
             finally
             {
+                platformReport.LabelFilteredEntries = relocations.ConvertAll(r => r.AssetPath);
                 stopwatch.Stop();
                 platformReport.DurationSeconds = Math.Round(stopwatch.Elapsed.TotalSeconds, 3);
             }
@@ -186,6 +200,14 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
         private void RestoreOriginalState(MultiPlatformAddressablesBuildRequest request, MpabBuildSessionState session)
         {
+            // Restore any entries still in the excluded group (non-empty only when a build failed
+            // mid-platform before the per-platform restore ran).
+            if (session.RelocatedEntries != null && session.RelocatedEntries.Count > 0)
+            {
+                addressables.RestoreRelocatedEntries(session.RelocatedEntries);
+                session.RelocatedEntries.Clear();
+            }
+
             if (request.RestoreOriginalProfileAfterBuild && !string.IsNullOrEmpty(session.OriginalAddressablesProfileName))
                 addressables.TrySetActiveProfile(session.OriginalAddressablesProfileName, out _);
 

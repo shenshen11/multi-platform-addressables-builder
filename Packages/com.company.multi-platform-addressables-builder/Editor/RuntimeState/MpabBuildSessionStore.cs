@@ -20,6 +20,10 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
         public List<string> PendingPlatforms = new List<string>();
         public List<string> CompletedPlatforms = new List<string>();
         public List<MpabGroupState> OriginalGroupStates = new List<MpabGroupState>();
+        // Entries temporarily relocated to the exclusion group by label filtering.
+        // Populated before each platform build, cleared after per-platform restore.
+        // Non-empty here after a crash means restore is needed on next editor launch.
+        public List<MpabEntryRelocation> RelocatedEntries = new List<MpabEntryRelocation>();
     }
 
     public sealed class MpabBuildSessionStore

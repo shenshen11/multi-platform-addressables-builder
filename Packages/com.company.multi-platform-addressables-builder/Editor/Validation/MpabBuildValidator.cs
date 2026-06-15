@@ -50,6 +50,8 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
         private void ValidatePlatforms(MultiPlatformAddressablesBuildRequest request, MpabValidationResult result)
         {
+            var hasLabelFilterRules = request.Config.GroupRules.Exists(r => r != null && r.EnableLabelFilter);
+
             foreach (var platformId in request.PlatformIds)
             {
                 var platform = request.Config.FindPlatform(platformId);
@@ -91,6 +93,19 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
                 if (string.IsNullOrWhiteSpace(platform.OutputPath))
                     result.Error($"Platform '{platform.PlatformId}' has no output path configured.");
+
+                if (platform.IncludedLabels != null && platform.IncludedLabels.Count > 0)
+                {
+                    if (!hasLabelFilterRules)
+                        result.Warning($"Platform '{platform.PlatformId}' has IncludedLabels configured but no group rule has EnableLabelFilter = true. Label filtering will have no effect.");
+
+                    var knownLabels = new HashSet<string>(addressables.Settings.GetLabels());
+                    foreach (var label in platform.IncludedLabels)
+                    {
+                        if (!knownLabels.Contains(label))
+                            result.Warning($"Platform '{platform.PlatformId}': label '{label}' is not registered in Addressables. Add it via Window > Asset Management > Addressables > Labels.");
+                    }
+                }
             }
         }
 
@@ -117,6 +132,9 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 matchedRules.Add(rule.Name);
             }
 
+            var platformsWithLabels = config.Platforms.Exists(
+                p => p.IncludedLabels != null && p.IncludedLabels.Count > 0);
+
             foreach (var rule in config.GroupRules)
             {
                 if (rule == null || rule.Kind == MpabGroupRuleKind.Ignored)
@@ -128,6 +146,9 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                     // Android-only project), so this is Info rather than Warning.
                     result.Info($"Group rule '{rule.Name}' (pattern: '{rule.GroupNamePattern}') did not match any bundled Addressables group.");
                 }
+
+                if (rule.EnableLabelFilter && !platformsWithLabels)
+                    result.Warning($"Group rule '{rule.Name}' has EnableLabelFilter = true but no platform has IncludedLabels configured. Label filtering will have no effect.");
             }
         }
 

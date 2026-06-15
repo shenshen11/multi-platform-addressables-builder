@@ -130,6 +130,10 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
         public string OutputPath = "BuildOutput/Android";
         public string ContentStatePath = "BuildOutput/Android/addressables_content_state.bin";
         public string CustomSwitchHandlerTypeName = string.Empty;
+        // Labels to include during label-filtered builds. Only entries carrying at least one
+        // of these labels will be built when a group rule has EnableLabelFilter = true.
+        // Leave empty to disable label filtering for this platform entirely.
+        public List<string> IncludedLabels = new List<string>();
     }
 
     [Serializable]
@@ -143,6 +147,10 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
         // Use this to classify groups whose names don't follow the naming convention
         // (e.g. third-party plugin groups, legacy groups).
         public List<string> ExplicitGroupNames = new List<string>();
+        // When true, entries within this group are filtered by the platform's IncludedLabels
+        // before building. Entries without a matching label are temporarily moved out.
+        // Requires the platform to have IncludedLabels configured.
+        public bool EnableLabelFilter = false;
     }
 
     [Serializable]

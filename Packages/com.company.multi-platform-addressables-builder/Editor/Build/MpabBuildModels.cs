@@ -22,6 +22,15 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
     }
 
     [Serializable]
+    public sealed class MpabEntryRelocation
+    {
+        public string EntryGuid;
+        public string AssetPath;
+        public string OriginalGroupGuid;
+        public string OriginalGroupName;
+    }
+
+    [Serializable]
     public sealed class MpabPlatformBuildReport
     {
         public string PlatformId;
@@ -37,6 +46,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
         public List<string> IncludedGroups = new List<string>();
         public List<string> ExcludedGroups = new List<string>();
         public List<string> UnmatchedGroups = new List<string>();
+        public List<string> LabelFilteredEntries = new List<string>();
     }
 
     [Serializable]
