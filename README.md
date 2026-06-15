@@ -187,6 +187,3 @@ Set the handler type name in the platform config. This keeps all vendor-specific
 
 ---
 
-## License
-
-MIT
