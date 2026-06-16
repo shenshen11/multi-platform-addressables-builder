@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -114,8 +113,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 BuildTargetName = platform.BuildTargetName,
                 BuildTargetGroupName = platform.BuildTargetGroupName,
                 AddressablesProfileName = platform.AddressablesProfileName,
-                OutputPath = platform.OutputPath,
-                ContentStatePath = platform.ContentStatePath,
                 Status = "Running"
             };
             var relocations = new List<MpabEntryRelocation>();
@@ -161,12 +158,12 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 sessionStore.Save(session);
                 addressables.SaveModifiedAddressablesAssets();
 
-                Directory.CreateDirectory(MpabPathUtility.ToAbsolutePath(platform.OutputPath));
-
                 session.Step = MpabSessionStep.BuildAddressables;
                 sessionStore.Save(session);
                 EditorUtility.DisplayProgressBar("Multi Platform Addressables Builder", $"Building Addressables: {platform.PlatformId}", 0.6f);
                 var buildResult = addressables.BuildPlayerContent(request.CleanBeforeBuild);
+                if (buildResult == null)
+                    throw new InvalidOperationException("Addressables BuildPlayerContent returned a null result. Check the Unity Console for Addressables errors above this message.");
                 if (!string.IsNullOrEmpty(buildResult.Error))
                     throw new InvalidOperationException(buildResult.Error);
 
@@ -185,6 +182,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
             }
             catch (Exception ex)
             {
+                MpabLogger.Error($"Platform '{platform.PlatformId}' build failed:\n{ex}");
                 platformReport.Status = "Failed";
                 platformReport.ErrorMessage = ex.Message;
             }

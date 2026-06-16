@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 
 namespace Company.MultiPlatformAddressablesBuilder.Editor
@@ -40,7 +39,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
             ValidatePlatforms(request, result);
             ValidateGroups(request.Config, result);
-            ValidateOutputIsolation(request, result);
 
             if (!result.HasErrors)
                 result.Info("Validation completed without blocking errors.");
@@ -90,9 +88,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                         result.Error($"Platform '{platform.PlatformId}' custom handler type was not found: {platform.CustomSwitchHandlerTypeName}");
                     }
                 }
-
-                if (string.IsNullOrWhiteSpace(platform.OutputPath))
-                    result.Error($"Platform '{platform.PlatformId}' has no output path configured.");
 
                 if (platform.IncludedLabels != null && platform.IncludedLabels.Count > 0)
                 {
@@ -152,25 +147,5 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
             }
         }
 
-        private static void ValidateOutputIsolation(MultiPlatformAddressablesBuildRequest request, MpabValidationResult result)
-        {
-            var paths = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-            foreach (var platformId in request.PlatformIds)
-            {
-                var platform = request.Config.FindPlatform(platformId);
-                if (platform == null || string.IsNullOrWhiteSpace(platform.OutputPath))
-                    continue;
-
-                var fullPath = Path.GetFullPath(MpabPathUtility.ToAbsolutePath(platform.OutputPath)).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-                foreach (var existing in paths)
-                {
-                    if (string.Equals(fullPath, existing.Value, StringComparison.OrdinalIgnoreCase))
-                        result.Error($"Platforms '{existing.Key}' and '{platform.PlatformId}' share the same output path: {fullPath}");
-                }
-
-                paths[platform.PlatformId] = fullPath;
-            }
-        }
     }
 }

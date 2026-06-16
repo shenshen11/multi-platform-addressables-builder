@@ -38,8 +38,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
         public string BuildTargetName;
         public string BuildTargetGroupName;
         public string AddressablesProfileName;
-        public string OutputPath;
-        public string ContentStatePath;
         public string Status;
         public string ErrorMessage;
         public double DurationSeconds;

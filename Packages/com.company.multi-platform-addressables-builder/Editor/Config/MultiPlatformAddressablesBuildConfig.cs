@@ -38,8 +38,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                     BuildTargetName = "Android",
                     BuildTargetGroupName = "Android",
                     AddressablesProfileName = "Default",
-                    OutputPath = "BuildOutput/Android",
-                    ContentStatePath = "BuildOutput/Android/addressables_content_state.bin"
                 },
                 new MpabPlatformConfig
                 {
@@ -50,8 +48,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                     BuildTargetName = "QNX",
                     BuildTargetGroupName = "Unknown",
                     AddressablesProfileName = "Default",
-                    OutputPath = "BuildOutput/QNX",
-                    ContentStatePath = "BuildOutput/QNX/addressables_content_state.bin"
                 }
             };
 
@@ -127,8 +123,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
         public string BuildTargetName = "Android";
         public string BuildTargetGroupName = "Android";
         public string AddressablesProfileName = "Default";
-        public string OutputPath = "BuildOutput/Android";
-        public string ContentStatePath = "BuildOutput/Android/addressables_content_state.bin";
         public string CustomSwitchHandlerTypeName = string.Empty;
         // Labels to include during label-filtered builds. Only entries carrying at least one
         // of these labels will be built when a group rule has EnableLabelFilter = true.
