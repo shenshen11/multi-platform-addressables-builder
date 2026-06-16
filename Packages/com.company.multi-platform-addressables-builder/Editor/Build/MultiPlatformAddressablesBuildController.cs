@@ -26,10 +26,5 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
             return new MpabBuildOrchestrator().Run(request);
         }
 
-        [MenuItem("Tools/Multi Platform Addressables Builder/Create Default Config")]
-        public static void CreateDefaultConfig()
-        {
-            MultiPlatformAddressablesBuildConfig.CreateDefaultAsset();
-        }
     }
 }
