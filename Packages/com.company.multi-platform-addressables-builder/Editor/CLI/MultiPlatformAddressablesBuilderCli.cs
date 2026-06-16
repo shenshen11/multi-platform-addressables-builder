@@ -24,8 +24,14 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
             var request = MultiPlatformAddressablesBuildRequest.FromConfig(config);
 
-            if (!string.IsNullOrWhiteSpace(platforms))
-                request.PlatformIds = new List<string>(platforms.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
+            if (string.IsNullOrWhiteSpace(platforms))
+            {
+                Debug.LogError("[MPAB] -mpabPlatforms is required. Example: -mpabPlatforms Android,QNX");
+                EditorApplication.Exit(1);
+                return;
+            }
+
+            request.PlatformIds = new List<string>(platforms.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries));
 
             if (Enum.TryParse(scopeValue, true, out MpabResourceScope parsedScope))
                 request.ResourceScope = parsedScope;

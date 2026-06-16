@@ -77,7 +77,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                     continue;
 
                 if (!selectedPlatforms.ContainsKey(platform.PlatformId))
-                    selectedPlatforms[platform.PlatformId] = platform.BuildByDefault;
+                    selectedPlatforms[platform.PlatformId] = true;
 
                 selectedPlatforms[platform.PlatformId] = EditorGUILayout.ToggleLeft(platform.PlatformId, selectedPlatforms[platform.PlatformId]);
             }
@@ -193,7 +193,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
             foreach (var platform in config.Platforms)
             {
                 if (platform != null)
-                    selectedPlatforms[platform.PlatformId] = platform.BuildByDefault;
+                    selectedPlatforms[platform.PlatformId] = true;
             }
         }
     }

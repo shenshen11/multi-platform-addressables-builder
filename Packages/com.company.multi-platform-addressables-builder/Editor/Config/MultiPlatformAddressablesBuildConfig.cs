@@ -32,7 +32,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 new MpabPlatformConfig
                 {
                     PlatformId = "Android",
-                    BuildByDefault = true,
                     SwitchMode = MpabPlatformSwitchMode.UnityBuildTarget,
                     BuildTargetName = "Android",
                     AddressablesProfileName = "Default",
@@ -40,7 +39,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 new MpabPlatformConfig
                 {
                     PlatformId = "QNX",
-                    BuildByDefault = false,
                     SwitchMode = MpabPlatformSwitchMode.CustomHandler,
                     BuildTargetName = "QNX",
                     AddressablesProfileName = "Default",
@@ -113,7 +111,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
     public sealed class MpabPlatformConfig
     {
         public string PlatformId = "Android";
-        public bool BuildByDefault = true;
         public MpabPlatformSwitchMode SwitchMode = MpabPlatformSwitchMode.UnityBuildTarget;
         public string BuildTargetName = "Android";
         public string AddressablesProfileName = "Default";

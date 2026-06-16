@@ -32,7 +32,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
             foreach (var platform in config.Platforms)
             {
-                if (platform != null && platform.BuildByDefault && !string.IsNullOrWhiteSpace(platform.PlatformId))
+                if (platform != null && !string.IsNullOrWhiteSpace(platform.PlatformId))
                     request.PlatformIds.Add(platform.PlatformId);
             }
 
