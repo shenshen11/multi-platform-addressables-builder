@@ -13,12 +13,12 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
 
             float step = EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
 
-            // foldout + PlatformId + DisplayName + BuildByDefault + SwitchMode + AddressablesProfileName
-            float height = step * 6;
+            // foldout + PlatformId + BuildByDefault + SwitchMode + AddressablesProfileName
+            float height = step * 5;
 
             var switchMode = (MpabPlatformSwitchMode)property.FindPropertyRelative("SwitchMode").enumValueIndex;
             if (switchMode == MpabPlatformSwitchMode.UnityBuildTarget)
-                height += step * 2; // BuildTargetName + BuildTargetGroupName
+                height += step;     // BuildTargetName
             else if (switchMode == MpabPlatformSwitchMode.CustomHandler)
                 height += step;     // CustomSwitchHandlerTypeName
 
@@ -43,7 +43,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 rect.y += step;
 
                 DrawField(ref rect, step, property, "PlatformId");
-                DrawField(ref rect, step, property, "DisplayName");
                 DrawField(ref rect, step, property, "BuildByDefault");
                 DrawField(ref rect, step, property, "SwitchMode");
 
@@ -51,7 +50,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 if (switchMode == MpabPlatformSwitchMode.UnityBuildTarget)
                 {
                     DrawField(ref rect, step, property, "BuildTargetName");
-                    DrawField(ref rect, step, property, "BuildTargetGroupName");
                 }
                 else if (switchMode == MpabPlatformSwitchMode.CustomHandler)
                 {

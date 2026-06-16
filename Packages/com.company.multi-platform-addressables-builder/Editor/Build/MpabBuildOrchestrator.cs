@@ -109,9 +109,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
             var platformReport = new MpabPlatformBuildReport
             {
                 PlatformId = platform.PlatformId,
-                DisplayName = platform.DisplayName,
                 BuildTargetName = platform.BuildTargetName,
-                BuildTargetGroupName = platform.BuildTargetGroupName,
                 AddressablesProfileName = platform.AddressablesProfileName,
                 Status = "Running"
             };
@@ -243,10 +241,8 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
             var platform = new MpabPlatformConfig
             {
                 PlatformId = session.OriginalBuildTargetName,
-                DisplayName = session.OriginalBuildTargetName,
                 SwitchMode = MpabPlatformSwitchMode.UnityBuildTarget,
-                BuildTargetName = session.OriginalBuildTargetName,
-                BuildTargetGroupName = session.OriginalBuildTargetGroupName
+                BuildTargetName = session.OriginalBuildTargetName
             };
 
             if (!platformSwitcher.SwitchPlatform(platform, out var error))

@@ -12,7 +12,6 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
         public string SessionId;
         public string CurrentPlatformId;
         public string OriginalBuildTargetName;
-        public string OriginalBuildTargetGroupName;
         public string OriginalAddressablesProfileId;
         public string OriginalAddressablesProfileName;
         public string ErrorMessage;
@@ -57,14 +56,11 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
             IEnumerable<string> pendingPlatforms,
             MpabAddressablesEditorAdapter addressables)
         {
-            var activeGroup = BuildPipeline.GetBuildTargetGroup(EditorUserBuildSettings.activeBuildTarget);
-
             return new MpabBuildSessionState
             {
                 SessionId = sessionId,
                 Step = MpabSessionStep.Prepare,
                 OriginalBuildTargetName = EditorUserBuildSettings.activeBuildTarget.ToString(),
-                OriginalBuildTargetGroupName = activeGroup.ToString(),
                 OriginalAddressablesProfileId = addressables.ActiveProfileId,
                 OriginalAddressablesProfileName = addressables.ActiveProfileName,
                 PendingPlatforms = new List<string>(pendingPlatforms),

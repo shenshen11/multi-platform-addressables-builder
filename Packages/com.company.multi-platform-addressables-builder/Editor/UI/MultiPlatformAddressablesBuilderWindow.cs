@@ -79,7 +79,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 if (!selectedPlatforms.ContainsKey(platform.PlatformId))
                     selectedPlatforms[platform.PlatformId] = platform.BuildByDefault;
 
-                selectedPlatforms[platform.PlatformId] = EditorGUILayout.ToggleLeft(platform.DisplayName, selectedPlatforms[platform.PlatformId]);
+                selectedPlatforms[platform.PlatformId] = EditorGUILayout.ToggleLeft(platform.PlatformId, selectedPlatforms[platform.PlatformId]);
             }
         }
 

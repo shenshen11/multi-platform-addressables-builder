@@ -34,9 +34,7 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
     public sealed class MpabPlatformBuildReport
     {
         public string PlatformId;
-        public string DisplayName;
         public string BuildTargetName;
-        public string BuildTargetGroupName;
         public string AddressablesProfileName;
         public string Status;
         public string ErrorMessage;

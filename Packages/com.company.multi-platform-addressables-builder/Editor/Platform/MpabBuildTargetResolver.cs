@@ -17,18 +17,13 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 return false;
             }
 
-            if (!Enum.TryParse(platform.BuildTargetGroupName, true, out group) || group == BuildTargetGroup.Unknown)
-            {
-                error = $"BuildTargetGroup '{platform.BuildTargetGroupName}' is not a built-in Unity target group.";
-                return false;
-            }
-
             if (!Enum.TryParse(platform.BuildTargetName, true, out target) || target == BuildTarget.NoTarget)
             {
                 error = $"BuildTarget '{platform.BuildTargetName}' is not a built-in Unity target.";
                 return false;
             }
 
+            group = BuildPipeline.GetBuildTargetGroup(target);
             return true;
         }
     }

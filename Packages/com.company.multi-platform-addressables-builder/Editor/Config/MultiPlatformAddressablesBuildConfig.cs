@@ -32,21 +32,17 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
                 new MpabPlatformConfig
                 {
                     PlatformId = "Android",
-                    DisplayName = "Android",
                     BuildByDefault = true,
                     SwitchMode = MpabPlatformSwitchMode.UnityBuildTarget,
                     BuildTargetName = "Android",
-                    BuildTargetGroupName = "Android",
                     AddressablesProfileName = "Default",
                 },
                 new MpabPlatformConfig
                 {
                     PlatformId = "QNX",
-                    DisplayName = "QNX",
                     BuildByDefault = false,
                     SwitchMode = MpabPlatformSwitchMode.CustomHandler,
                     BuildTargetName = "QNX",
-                    BuildTargetGroupName = "Unknown",
                     AddressablesProfileName = "Default",
                 }
             };
@@ -117,11 +113,9 @@ namespace Company.MultiPlatformAddressablesBuilder.Editor
     public sealed class MpabPlatformConfig
     {
         public string PlatformId = "Android";
-        public string DisplayName = "Android";
         public bool BuildByDefault = true;
         public MpabPlatformSwitchMode SwitchMode = MpabPlatformSwitchMode.UnityBuildTarget;
         public string BuildTargetName = "Android";
-        public string BuildTargetGroupName = "Android";
         public string AddressablesProfileName = "Default";
         public string CustomSwitchHandlerTypeName = string.Empty;
         // Labels to include during label-filtered builds. Only entries carrying at least one
